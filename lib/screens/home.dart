@@ -120,7 +120,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
-                    'Welcome',
+                    'Selamat Datang',
                     style: TextStyle(
                       color: Colors.grey,
                       fontFamily: 'RockoFLF',
