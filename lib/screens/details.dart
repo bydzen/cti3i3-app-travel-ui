@@ -125,7 +125,7 @@ class Details extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  '/person',
+                  '/orang',
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'RockoFLF',
@@ -147,7 +147,7 @@ class Details extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(
                     Icons.star,
                     color: Colors.amber,
@@ -156,7 +156,7 @@ class Details extends StatelessWidget {
                     width: 6,
                   ),
                   Text(
-                    '4.9',
+                    destination.rating,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'RockoFLF',
@@ -177,12 +177,12 @@ class Details extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(
             vertical: 6.0,
           ),
           child: Text(
-            'About',
+            'Tentang ' + destination.place,
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'RockoFLF Bold',

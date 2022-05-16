@@ -3,6 +3,7 @@ class Destination {
   String place;
   String image;
   double price;
+  String rating;
   String about;
   List<String> gallery;
 
@@ -11,6 +12,7 @@ class Destination {
       required this.place,
       required this.image,
       required this.price,
+      required this.rating,
       required this.about,
       required this.gallery});
 }
