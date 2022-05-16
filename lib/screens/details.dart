@@ -116,7 +116,7 @@ class Details extends StatelessWidget {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  '\$' + destination.price.toStringAsFixed(0),
+                  'Rp. ' + destination.price.toStringAsFixed(0),
                   style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'RockoFLF',

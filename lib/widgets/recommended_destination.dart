@@ -27,15 +27,15 @@ class RecommendedDestination extends StatelessWidget {
               color: Colors.blue.withOpacity(0.6),
               borderRadius: BorderRadius.circular(10),
             ),
-            width: 72,
-            height: 36,
+            width: 76,
+            height: 26,
             child: Center(
               child: Text(
-                '\$' + destination.price.toStringAsFixed(0),
+                'Rp. ' + destination.price.toStringAsFixed(0),
                 style: const TextStyle(
                   color: Colors.white,
                   fontFamily: 'RockoFLF',
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),

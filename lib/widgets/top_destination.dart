@@ -41,7 +41,7 @@ class TopDestination extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        destination.place,
+                        destination.name,
                         style: const TextStyle(
                           color: Colors.black,
                           fontFamily: 'RockoFLF Bold',
@@ -53,7 +53,7 @@ class TopDestination extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        destination.name,
+                        destination.place,
                         style: const TextStyle(
                           fontFamily: 'RockoFLF',
                           color: Colors.grey,

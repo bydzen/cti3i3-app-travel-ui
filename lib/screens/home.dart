@@ -217,7 +217,7 @@ class _HomeState extends State<Home> {
               children: const [
                 Expanded(
                   child: Text(
-                    'Recommended',
+                    'Rekomendasi',
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'RockoFLF Bold',
@@ -290,7 +290,7 @@ class _HomeState extends State<Home> {
                 children: const [
                   Expanded(
                     child: Text(
-                      'Top Destination',
+                      'Paling Populer',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'RockoFLF Bold',
