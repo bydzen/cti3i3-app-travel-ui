@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_app_challenge/models/destination.dart';
+import 'package:LocaVel/models/destination.dart';
 
 class TopDestination extends StatelessWidget {
   final Destination destination;
@@ -41,7 +41,7 @@ class TopDestination extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        destination.place,
+                        destination.name,
                         style: const TextStyle(
                           color: Colors.black,
                           fontFamily: 'RockoFLF Bold',
@@ -53,7 +53,7 @@ class TopDestination extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        destination.name,
+                        destination.place,
                         style: const TextStyle(
                           fontFamily: 'RockoFLF',
                           color: Colors.grey,

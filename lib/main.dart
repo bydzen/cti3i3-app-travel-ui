@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_app_challenge/const.dart';
-import 'package:flutter_travel_app_challenge/screens/home.dart';
+import 'package:LocaVel/const.dart';
+import 'package:LocaVel/screens/home.dart';
 
 void main() {
   runApp(MyApp());

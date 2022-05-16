@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_app_challenge/models/destination.dart';
+import 'package:LocaVel/models/destination.dart';
 
 class Details extends StatelessWidget {
   final Destination destination;
@@ -116,7 +116,7 @@ class Details extends StatelessWidget {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  '\$' + destination.price.toStringAsFixed(0),
+                  'Rp. ' + destination.price.toStringAsFixed(0),
                   style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'RockoFLF',

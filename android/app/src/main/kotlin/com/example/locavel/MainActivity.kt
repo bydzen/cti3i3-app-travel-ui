@@ -1,4 +1,4 @@
-package com.example.flutter_travel_app_challenge
+package com.apb.locavel
 
 import io.flutter.embedding.android.FlutterActivity
 
