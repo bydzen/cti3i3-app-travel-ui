@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_app_challenge/models/destination.dart';
-import 'package:flutter_travel_app_challenge/services/destination_service.dart';
-import 'package:flutter_travel_app_challenge/widgets/recommended_destination.dart';
-import 'package:flutter_travel_app_challenge/widgets/searchbar.dart';
-import 'package:flutter_travel_app_challenge/widgets/top_destination.dart';
-import 'package:flutter_travel_app_challenge/screens/details.dart';
+import 'package:LocaVel/models/destination.dart';
+import 'package:LocaVel/services/destination_service.dart';
+import 'package:LocaVel/widgets/recommended_destination.dart';
+import 'package:LocaVel/widgets/searchbar.dart';
+import 'package:LocaVel/widgets/top_destination.dart';
+import 'package:LocaVel/screens/details.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -200,7 +200,7 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildRecommendedWidget() {
-    List<Destination> recommendedDestinations =
+    List recommendedDestinations =
         destinationService.recommendedDestinations;
 
     return Padding(
@@ -277,7 +277,7 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildTopWidget() {
-    List<Destination> topDestinations = destinationService.topDestinations;
+    List topDestinations = destinationService.topDestinations;
     return Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(

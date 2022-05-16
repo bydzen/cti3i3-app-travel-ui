@@ -1,4 +1,4 @@
-import 'package:flutter_travel_app_challenge/models/destination.dart';
+import 'package:LocaVel/models/destination.dart';
 
 class DestinationService {
   static final List<String> _gallery = [
