@@ -5,6 +5,7 @@ import 'package:LocaVel/widgets/recommended_destination.dart';
 import 'package:LocaVel/widgets/searchbar.dart';
 import 'package:LocaVel/widgets/top_destination.dart';
 import 'package:LocaVel/screens/details.dart';
+import 'package:LocaVel/widgets/bookmark.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -53,9 +54,26 @@ class _HomeState extends State<Home> {
         ),
         Container(
           color: const Color(0xfff6f8fb),
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              children: [
+                buildBookMarkWidget(),
+              ],
+            ),
+          ),
         ),
         Container(
           color: const Color(0xfff6f8fb),
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              children: [
+                buildHeaderAboutWidget(),
+                buildAboutUSWidget(),
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -200,8 +218,7 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildRecommendedWidget() {
-    List recommendedDestinations =
-        destinationService.recommendedDestinations;
+    List recommendedDestinations = destinationService.recommendedDestinations;
 
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -333,6 +350,138 @@ class _HomeState extends State<Home> {
                       child: Padding(
                         padding: const EdgeInsets.only(
                           right: 20.0,
+                        ),
+                        child: TopDestination(
+                          destination: destination,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ));
+  }
+
+  Widget buildAboutUSWidget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 6.0,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 12.0,
+            bottom: 12.0,
+          ),
+          child: Text(
+            'LocaVel adalah sebuah Aplikasi menggunakan flutter, Aplikasi ini digunakan seabgai guide tour para wisatawan' +
+                ' baik lokal maupun mancanegara yang akan berkunjung ke Indonesa. Tim yang membuat aplikasi ini adalah Mahaiswa berprestasi dari Telkom University',
+            style: const TextStyle(
+              color: Colors.grey,
+              fontFamily: 'RockoFLF',
+              fontSize: 14,
+              height: 1.5,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  ////////////////////////BATAS PROFILE KU////////////////////////////////////////////////////////////////
+  Widget buildHeaderAboutWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 12.0,
+                  bottom: 12.0,
+                ),
+                child: Text(
+                  'ABOUT US',
+                  style: const TextStyle(
+                    color: Colors.black87,
+                    fontFamily: 'RockoFLF',
+                    fontSize: 14,
+                    height: 1.5,
+                  ),
+                ),
+              ),
+              Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('images/profile.png'),
+                        fit: BoxFit.fill),
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                        color: Colors.blueAccent.withOpacity(.2), width: 1)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+//////////////////////////////// BOOKMARK ///////////////////////////////////
+  Widget buildBookMarkWidget() {
+    List BookMarkPage = destinationService.BookMarkPage;
+    return Padding(
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6.0),
+              child: Row(
+                children: const [
+                  Expanded(
+                    child: Text(
+                      'Disimpan',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'RockoFLF Bold',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 620.0,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  physics: BouncingScrollPhysics(),
+                  itemCount: BookMarkPage.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final Destination destination = BookMarkPage[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Details(destination: destination),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 20.0,
                         ),
                         child: TopDestination(
                           destination: destination,

@@ -80,7 +80,7 @@ class Details extends StatelessWidget {
               ),
               child: const Center(
                 child: Icon(
-                  Icons.share,
+                  Icons.bookmark,
                   color: Colors.white,
                 ),
               ),
