@@ -12,7 +12,7 @@ class BookMarkPage extends StatelessWidget {
       children: [
         Container(
           height: 80,
-          width: MediaQuery.of(context).size.width - 114,
+          width: MediaQuery.of(context).size.width - 109,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(
@@ -30,12 +30,11 @@ class BookMarkPage extends StatelessWidget {
                     width: 60,
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 10.0,
-                    right: 0.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +68,7 @@ class BookMarkPage extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: 0,
+          width: 15,
         ),
         Positioned(
           child: Container(
@@ -85,7 +84,7 @@ class BookMarkPage extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 20.0,
+          width: 0,
         ),
       ],
     );

@@ -311,7 +311,7 @@ class Details extends StatelessWidget {
               children: const [
                 Spacer(),
                 Text(
-                  'Direct Me',
+                  'Pesan Wisata',
                   style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'RockoFLF Bold',

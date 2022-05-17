@@ -415,14 +415,15 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: const EdgeInsets.only(
                   top: 12.0,
-                  bottom: 12.0,
+                  bottom: 50.0,
                 ),
                 child: Text(
-                  'ABOUT US',
+                  'Tentang Kami',
                   style: const TextStyle(
                     color: Colors.black87,
                     fontFamily: 'RockoFLF',
-                    fontSize: 14,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     height: 1.5,
                   ),
                 ),
@@ -458,13 +459,22 @@ class _HomeState extends State<Home> {
                 children: const [
                   Expanded(
                     child: Text(
-                      'Disimpan',
+                      'Wisata Favorit Anda',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'RockoFLF Bold',
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 10.0,
+                    ),
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.redAccent,
                     ),
                   ),
                 ],
@@ -536,7 +546,7 @@ class _HomeState extends State<Home> {
                     ),
                     child: Icon(
                       Icons.add_location_alt,
-                      color: Colors.grey,
+                      color: Colors.blueAccent,
                     ),
                   ),
                 ],
