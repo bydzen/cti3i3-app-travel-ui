@@ -34,7 +34,7 @@ class TopDestination extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 10.0,
-                    right: 20.0,
+                    right: 10.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

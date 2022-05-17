@@ -1,18 +1,5 @@
 import 'package:LocaVel/models/destination.dart';
 
-class chattService {
-  static final List<String> _profile = [
-    'images/profile.png',
-  ];
-  List<chatting> chattingpage = [
-    chatting(
-        name: 'Bagas',
-        isi: 'Apa benar di Raja Empat Gratis buat Kencing ?',
-        image: 'images/profile.jpg',
-        profile: _profile)
-  ];
-}
-
 class DestinationService {
   static final List<String> _gallery = [
     'images/destination1.jpg',

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:LocaVel/models/destination.dart';
 import 'package:LocaVel/models/bookmark.dart';
 
 class BookMarkPage extends StatelessWidget {
@@ -13,10 +12,11 @@ class BookMarkPage extends StatelessWidget {
       children: [
         Container(
           height: 80,
+          width: MediaQuery.of(context).size.width - 114,
           decoration: const BoxDecoration(
-            color: Colors.black,
+            color: Colors.white,
             borderRadius: BorderRadius.all(
-              Radius.circular(12200.0),
+              Radius.circular(12.0),
             ),
           ),
           child: Padding(
@@ -35,7 +35,7 @@ class BookMarkPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 10.0,
-                    right: 20.0,
+                    right: 0.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -65,6 +65,22 @@ class BookMarkPage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 0,
+        ),
+        Positioned(
+          child: Container(
+            padding: const EdgeInsets.only(
+              left: 10.0,
+            ),
+            child: const Center(
+              child: Icon(
+                Icons.remove_circle_outline,
+                color: Colors.grey,
+              ),
             ),
           ),
         ),

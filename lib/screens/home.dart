@@ -1,4 +1,5 @@
 import 'package:LocaVel/models/bookmark.dart';
+import 'package:LocaVel/services/bookmark_service.dart';
 import 'package:flutter/material.dart';
 import 'package:LocaVel/models/destination.dart';
 import 'package:LocaVel/services/destination_service.dart';
@@ -17,6 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   DestinationService destinationService = DestinationService();
+  BookmarkService bookmarkService = BookmarkService();
 
   @override
   Widget build(BuildContext context) {
@@ -445,7 +447,7 @@ class _HomeState extends State<Home> {
 
 //////////////////////////////// BOOKMARK ///////////////////////////////////
   Widget buildBookMarkWidget() {
-    List BookMarkPage = destinationService.BookMarkPage;
+    List bookmarkedDestination = bookmarkService.bookmarkedDestination;
     return Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
@@ -475,25 +477,24 @@ class _HomeState extends State<Home> {
                 child: ListView.builder(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   physics: BouncingScrollPhysics(),
-                  itemCount: BookMarkPage.length,
+                  itemCount: bookmarkedDestination.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final Bookmark destination = BookMarkPage[index];
+                    final Bookmark anjing = bookmarkedDestination[index];
                     return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Details(destination: destination),
-                          ),
-                        );
-                      },
+                      // onTap: () {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => BookMarkPage(anjing: anjing),
+                      //     ),
+                      //   );
+                      // },
                       child: Padding(
                         padding: const EdgeInsets.only(
                           bottom: 20.0,
                         ),
-                        child: TopDestination(
-                          destination: destination,
+                        child: BookMarkPage(
+                          anjing: anjing,
                         ),
                       ),
                     );
