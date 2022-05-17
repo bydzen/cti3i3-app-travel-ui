@@ -16,3 +16,16 @@ class Destination {
       required this.about,
       required this.gallery});
 }
+
+class chatting {
+  String name;
+  String isi;
+  String image;
+  List<String> profile;
+
+  chatting(
+      {required this.name,
+      required this.isi,
+      required this.image,
+      required this.profile});
+}
