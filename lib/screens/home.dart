@@ -1,3 +1,4 @@
+import 'package:LocaVel/models/bookmark.dart';
 import 'package:flutter/material.dart';
 import 'package:LocaVel/models/destination.dart';
 import 'package:LocaVel/services/destination_service.dart';
@@ -5,7 +6,7 @@ import 'package:LocaVel/widgets/recommended_destination.dart';
 import 'package:LocaVel/widgets/searchbar.dart';
 import 'package:LocaVel/widgets/top_destination.dart';
 import 'package:LocaVel/screens/details.dart';
-import 'package:LocaVel/widgets/bookmark.dart';
+import 'package:LocaVel/widgets/bookmark_destination.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -51,6 +52,14 @@ class _HomeState extends State<Home> {
         ),
         Container(
           color: const Color(0xfff6f8fb),
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              children: [
+                buildWilayah(),
+              ],
+            ),
+          ),
         ),
         Container(
           color: const Color(0xfff6f8fb),
@@ -460,7 +469,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(
-              height: 620.0,
+              height: MediaQuery.of(context).size.height * 0.71,
               child: Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: ListView.builder(
@@ -468,7 +477,7 @@ class _HomeState extends State<Home> {
                   physics: BouncingScrollPhysics(),
                   itemCount: BookMarkPage.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final Destination destination = BookMarkPage[index];
+                    final Bookmark destination = BookMarkPage[index];
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -482,6 +491,78 @@ class _HomeState extends State<Home> {
                       child: Padding(
                         padding: const EdgeInsets.only(
                           bottom: 20.0,
+                        ),
+                        child: TopDestination(
+                          destination: destination,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ));
+  }
+
+  ///////////////////////////////// WILAYAH ///////////////////////////////////
+  Widget buildWilayah() {
+    List topDestinations = destinationService.topDestinations;
+    return Padding(
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: const [
+                  Expanded(
+                    child: Text(
+                      'Wisata Berdasarkan Wilayah',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'RockoFLF Bold',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 10.0,
+                    ),
+                    child: Icon(
+                      Icons.add_location_alt,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: topDestinations.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final Destination destination = topDestinations[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Details(destination: destination),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 10.0,
                         ),
                         child: TopDestination(
                           destination: destination,
