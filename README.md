@@ -3,11 +3,14 @@ Flutter UI Travel app for completing tasks in mobile development classes.
 
 ### Setup
 Run the following commands to install the dependencies:
+
 ```flutter pub get```
+
 ```flutter pub run build_runner build```
 
 ### Usage
 To run the app, run the following command:
+
 ```flutter run```
 
 ### Documentation
@@ -15,6 +18,7 @@ To run the app, run the following command:
 
 ### Thanks
 Thanks to the following people for their contributions:
+
 - [Flutter Community](https://flutter.dev/community)
 - [Flutter Dev](https://flutter.dev/dev)
 - [Flutter Team](https://flutter.dev/team)
