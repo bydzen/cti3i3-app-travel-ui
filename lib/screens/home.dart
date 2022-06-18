@@ -390,13 +390,13 @@ class _HomeState extends State<Home> {
             bottom: 12.0,
           ),
           child: Text(
-            'LocaVel adalah sebuah Aplikasi menggunakan flutter, Aplikasi ini digunakan seabgai guide tour para wisatawan' +
-                ' baik lokal maupun mancanegara yang akan berkunjung ke Indonesa. Tim yang membuat aplikasi ini adalah Mahaiswa berprestasi dari Telkom University',
+            'Nama :\nBagas Alfito Prismawan\n\nEmail  :\nbagas@student.telkomuniversity.ac.id\n\nAsal    :\nDKI Jakarta',
             style: const TextStyle(
-              color: Colors.grey,
+              color: Colors.black54,
               fontFamily: 'RockoFLF',
-              fontSize: 14,
-              height: 1.5,
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+              height: 2,
             ),
           ),
         ),
@@ -418,7 +418,7 @@ class _HomeState extends State<Home> {
                   bottom: 50.0,
                 ),
                 child: Text(
-                  'Tentang Kami',
+                  'Profile',
                   style: const TextStyle(
                     color: Colors.black87,
                     fontFamily: 'RockoFLF',
