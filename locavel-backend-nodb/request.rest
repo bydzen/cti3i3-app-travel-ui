@@ -1,0 +1,15 @@
+### Local
+
+GET http://localhost:3000/wisata
+
+###
+
+GET http://localhost:3000/wisata/1
+
+### Heroku
+
+GET https://locavel.herokuapp.com/wisata
+
+###
+
+GET https://locavel.herokuapp.com/wisata/1
