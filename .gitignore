@@ -48,3 +48,5 @@ app.*.map.json
 # Backend
 /locavel-backend/node_modules
 /locavel-backend/.env
+/locavel-backend-nodb/node_modules
+/locavel-backend-nodb/.env
