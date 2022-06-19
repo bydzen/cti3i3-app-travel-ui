@@ -1,6 +1,9 @@
 # LocaVel - API Usage
 Usage of endpoints API LocaVel App.
 
+## Base URI
+Base URL for API endpoint: https://locavel.herokuapp.com/
+
 ## Root Page
 Root endpoint
 
