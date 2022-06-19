@@ -61,11 +61,31 @@ var wisata = [
     },
 ];
 
+// Create data array for user
+const user = {
+    id: 1,
+    nama: 'Local Travel',
+    email: 'admin@locavel.com',
+    asal: 'DKI Jakarta',
+};
+
 // Root path
 app.get('/', function (_req, res) {
     res.json({
         message: 'Welcome to LocaVel API',
     });
+});
+
+// Get user by id
+app.get('/user/:id', function (req, res) {
+    const id = req.params.id;
+    const user = users.find((user) => user.id === parseInt(id));
+    if (!user) {
+        return res.status(404).json({
+            message: 'User not found',
+        });
+    }
+    res.json(user);
 });
 
 // Get wisata from array
