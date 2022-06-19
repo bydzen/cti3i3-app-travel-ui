@@ -1,7 +1,6 @@
 // Require module
 var express = require('express'),
-    http = require('http'),
-    bodyParser = require('body-parser');
+    http = require('http');
 
 // MySQL required
 var connection = require('./config/database');
@@ -10,14 +9,11 @@ var connection = require('./config/database');
 var app = express();
 
 // Middleware
-
 // Parsing the body
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // Parsing the JSON
 app.use(express.json());
-app.use(bodyParser.json());
 
 // App port
 app.set('port', process.env.PORT || 3000);
