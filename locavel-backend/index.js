@@ -39,6 +39,19 @@ app.get('/', function (_req, res) {
     });
 });
 
+// Get user by id
+app.get('/user/:id', function (req, res) {
+    const id = req.params.id;
+    connection.query(
+        'SELECT * FROM user WHERE id = ?',
+        [id],
+        function (error, results, fields) {
+            if (error) throw error;
+            res.json(results);
+        }
+    );
+});
+
 // Post wisata
 app.post('/wisata', function (req, res) {
     var data = {
