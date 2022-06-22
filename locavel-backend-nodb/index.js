@@ -1,28 +1,14 @@
-// Require module
-var express = require('express'),
-    http = require('http'),
-    bodyParser = require('body-parser');
+require('dotenv').config();
 
-// The app express
-var app = express();
+const express = require('express');
+const app = express();
+const jwt = require('jsonwebtoken');
+const http = require('http');
 
-// Middleware
-// Parsing the body
-app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// Parsing the JSON
 app.use(express.json());
-app.use(bodyParser.json());
-
-// App port
-app.set('port', process.env.PORT || 3000);
-
-// Trust proxy
-app.set('trust proxy', true);
 
 // Create data array of wisata
-var wisata = [
+const wisata = [
     {
         id: 1,
         nama: 'Raja Ampat',
@@ -62,48 +48,112 @@ var wisata = [
 ];
 
 // Create data array for user
-const user = {
-    id: 1,
-    nama: 'Local Travel',
-    email: 'admin@locavel.com',
-    asal: 'DKI Jakarta',
-};
+const user = [
+    {
+        id: 1,
+        nama: 'Local Travel',
+        email: 'admin@locavel.com',
+        asal: 'DKI Jakarta',
+    },
+    {
+        id: 2,
+        nama: 'Sultan Kautsar',
+        email: 'sultankautsar@locavel.com',
+        asal: 'Magelang, Jawa Tengah',
+    },
+];
+
+// Middleware
+// App port
+app.set('port', process.env.PORT || 3000);
+
+// Trust proxy
+app.set('trust proxy', true);
+
+let refreshTokens = [];
+
+app.post('/token', (req, res) => {
+    const refreshToken = req.body.token;
+    if (refreshToken == null) return res.sendStatus(401);
+    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        const accessToken = generateAccessToken({ name: user.id });
+        res.json({ accessToken: accessToken });
+    });
+});
+
+app.delete('/logout', (req, res) => {
+    refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
+    res.sendStatus(204);
+});
+
+app.post('/login', (req, res) => {
+    // Authenticate User
+    const id = req.body.id;
+    const user = { user: id };
+
+    const accessToken = generateAccessToken(user);
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+    refreshTokens.push(refreshToken);
+    res.json({ accessToken: accessToken, refreshToken: refreshToken });
+});
+
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: '30s',
+    });
+}
 
 // Root path
-app.get('/', function (_req, res) {
+app.get('/', (_req, res) => {
     res.json({
         message: 'Welcome to LocaVel API',
     });
 });
 
 // Get user by id
-app.get('/user/:id', function (req, res) {
+app.get('/user/:id', authenticateToken, (req, res) => {
     const id = req.params.id;
-    const user = users.find((user) => user.id === parseInt(id));
-    if (!user) {
+    const result = user.find((user) => user.id === parseInt(id));
+    if (!result) {
         return res.status(404).json({
             message: 'User not found',
         });
     }
-    res.json(user);
+    res.json(result);
 });
 
 // Get wisata from array
-app.get('/wisata', function (req, res) {
+app.get('/wisata', authenticateToken, (_req, res) => {
     res.json(wisata);
 });
 
 // Get wisata by id
-app.get('/wisata/:id', function (req, res) {
+app.get('/wisata/:id', authenticateToken, (req, res) => {
     const id = req.params.id;
-    const wisataById = wisata.find((wisata) => wisata.id === parseInt(id));
-    if (!wisataById) {
+    const result = wisata.find((wisata) => wisata.id === parseInt(id));
+    if (!result) {
         res.status(404).json({
             message: 'Wisata not found',
         });
     }
-    res.json(wisataById);
+    res.json(result);
 });
+
+// Authenticate the JWT token
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (token == null) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        console.log(err);
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+}
 
 // Creating the server
 http.createServer(app).listen(app.get('port'), function () {
