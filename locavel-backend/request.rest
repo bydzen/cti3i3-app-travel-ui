@@ -1,14 +1,14 @@
 ### Local
 
-GET http://localhost:3000/user/1
+GET http://localhost:4000/user/1
 
 ###
 
-GET http://localhost:3000/wisata
+GET http://localhost:4000/wisata
 
 ###
 
-GET http://localhost:3000/wisata/1
+GET http://localhost:4000/wisata/1
 
 ### Heroku
 
