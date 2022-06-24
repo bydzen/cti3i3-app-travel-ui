@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:LocaVel/models/bookmark.dart';
 import 'package:LocaVel/services/bookmark_service.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,9 @@ import 'package:LocaVel/widgets/searchbar.dart';
 import 'package:LocaVel/widgets/top_destination.dart';
 import 'package:LocaVel/screens/details.dart';
 import 'package:LocaVel/widgets/bookmark_destination.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -378,20 +383,20 @@ class _HomeState extends State<Home> {
   Widget buildAboutUSWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         Padding(
           padding: EdgeInsets.symmetric(
             vertical: 6.0,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             top: 12.0,
             bottom: 12.0,
           ),
           child: Text(
             'Nama :\nBagas Alfito Prismawan\n\nEmail  :\nbagas@student.telkomuniversity.ac.id\n\nAsal    :\nDKI Jakarta',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black54,
               fontFamily: 'RockoFLF',
               fontWeight: FontWeight.bold,
@@ -518,7 +523,12 @@ class _HomeState extends State<Home> {
 
   ///////////////////////////////// WILAYAH ///////////////////////////////////
   Widget buildWilayah() {
-    List topDestinations = destinationService.topDestinations;
+    Completer<GoogleMapController> _controller = Completer();
+    final CameraPosition _kGooglePlex = CameraPosition(
+      target: LatLng(-6.9733112, 107.6281415),
+      zoom: 14.4746,
+    );
+
     return Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
@@ -556,31 +566,9 @@ class _HomeState extends State<Home> {
               height: MediaQuery.of(context).size.height * 0.7,
               child: Padding(
                 padding: const EdgeInsets.only(top: 12.0),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: topDestinations.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Destination destination = topDestinations[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Details(destination: destination),
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 10.0,
-                        ),
-                        child: TopDestination(
-                          destination: destination,
-                        ),
-                      ),
-                    );
-                  },
+                child: GoogleMap(
+                  mapType: MapType.hybrid,
+                  initialCameraPosition: _kGooglePlex,
                 ),
               ),
             ),

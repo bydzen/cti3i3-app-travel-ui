@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:LocaVel/models/destination.dart';
 
+// import '../models/places_model.dart';
+// import '../services/places_service.dart';
+
 class TopDestination extends StatelessWidget {
   final Destination destination;
 
