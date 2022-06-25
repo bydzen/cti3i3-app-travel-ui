@@ -12,5 +12,22 @@ class Places {
       var json = response.body;
       return destinationFromJson(json);
     }
+    return null;
+  }
+
+  getData() async {
+    var destination = await Places().getDestination();
+
+    // ignore: unused_local_variable
+    List<Destination> placesList = [
+      Destination(
+          id: destination![0].id,
+          nama: destination[0].nama,
+          tempat: destination[0].tempat,
+          harga: destination[0].harga,
+          konten: destination[0].konten,
+          rating: destination[0].rating,
+          gambar: destination[0].gambar),
+    ];
   }
 }

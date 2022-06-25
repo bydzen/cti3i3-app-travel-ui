@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:LocaVel/models/destination.dart';
+import 'package:locavel/models/destination.dart';
 
 class Details extends StatelessWidget {
   final Destination destination;
 
+  // ignore: use_key_in_widget_constructors
   const Details({required this.destination});
 
   @override
@@ -148,16 +149,16 @@ class Details extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 6,
                   ),
                   Text(
                     destination.rating,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'RockoFLF',
                       fontWeight: FontWeight.bold,
@@ -178,12 +179,12 @@ class Details extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             vertical: 6.0,
           ),
           child: Text(
             'Tentang ' + destination.place,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'RockoFLF Bold',
               fontSize: 20,
@@ -301,9 +302,7 @@ class Details extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
             ),
           ),
-          onPressed: () {
-            // TODO: Book destination
-          },
+          onPressed: () {},
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

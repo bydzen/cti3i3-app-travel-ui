@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:LocaVel/models/destination.dart';
+import 'package:locavel/models/destination.dart';
 
 class RecommendedDestination extends StatelessWidget {
   final Destination destination;
 
+  // ignore: use_key_in_widget_constructors
   const RecommendedDestination({required this.destination});
 
   @override

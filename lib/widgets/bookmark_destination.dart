@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:LocaVel/models/bookmark.dart';
+import 'package:locavel/models/bookmark.dart';
 
 class BookMarkPage extends StatelessWidget {
-  final Bookmark anjing;
+  final Bookmark bookwidget;
 
-  const BookMarkPage({required this.anjing});
+  // ignore: use_key_in_widget_constructors
+  const BookMarkPage({required this.bookwidget});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class BookMarkPage extends StatelessWidget {
               children: [
                 ClipRRect(
                   child: Image.asset(
-                    anjing.image,
+                    bookwidget.image,
                     height: 60,
                     width: 60,
                     fit: BoxFit.cover,
@@ -41,7 +42,7 @@ class BookMarkPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        anjing.name,
+                        bookwidget.name,
                         style: const TextStyle(
                           color: Colors.black,
                           fontFamily: 'RockoFLF Bold',
@@ -53,7 +54,7 @@ class BookMarkPage extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        anjing.place,
+                        bookwidget.place,
                         style: const TextStyle(
                           fontFamily: 'RockoFLF',
                           color: Colors.grey,
@@ -67,7 +68,7 @@ class BookMarkPage extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Positioned(

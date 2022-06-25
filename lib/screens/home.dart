@@ -1,18 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:LocaVel/models/bookmark.dart';
-import 'package:LocaVel/services/bookmark_service.dart';
+import 'package:locavel/models/bookmark.dart';
+import 'package:locavel/services/bookmark_service.dart';
 import 'package:flutter/material.dart';
-import 'package:LocaVel/models/destination.dart';
-import 'package:LocaVel/services/destination_service.dart';
-import 'package:LocaVel/widgets/recommended_destination.dart';
-import 'package:LocaVel/widgets/searchbar.dart';
-import 'package:LocaVel/widgets/top_destination.dart';
-import 'package:LocaVel/screens/details.dart';
-import 'package:LocaVel/widgets/bookmark_destination.dart';
-import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:locavel/models/destination.dart';
+import 'package:locavel/services/destination_service.dart';
+import 'package:locavel/widgets/recommended_destination.dart';
+import 'package:locavel/widgets/searchbar.dart';
+import 'package:locavel/widgets/top_destination.dart';
+import 'package:locavel/screens/details.dart';
+import 'package:locavel/widgets/bookmark_destination.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:locavel/services/places_service.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,6 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   DestinationService destinationService = DestinationService();
   BookmarkService bookmarkService = BookmarkService();
+  Places placesService = Places();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +50,7 @@ class _HomeState extends State<Home> {
                 children: [
                   buildProfileWidget(),
                   buildSearchWidget(),
+                  // buildPlacesWidget(),
                   buildRecommendedWidget(),
                   buildTopWidget(),
                 ],
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                buildHeaderAboutWidget(),
+                buildHeaderProfileWidget(),
                 buildAboutUSWidget(),
               ],
             ),
@@ -233,6 +234,82 @@ class _HomeState extends State<Home> {
     );
   }
 
+  // Widget buildPlacesWidget() {
+  //   List placesList = placesService.placesList;
+
+  //   return Padding(
+  //     padding: const EdgeInsets.only(top: 10, bottom: 10),
+  //     child: Column(
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.symmetric(
+  //             vertical: 6.0,
+  //           ),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.end,
+  //             crossAxisAlignment: CrossAxisAlignment.end,
+  //             children: const [
+  //               Expanded(
+  //                 child: Text(
+  //                   'Rekomendasi',
+  //                   style: TextStyle(
+  //                     color: Colors.black,
+  //                     fontFamily: 'RockoFLF Bold',
+  //                     fontWeight: FontWeight.bold,
+  //                     fontSize: 24,
+  //                   ),
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: EdgeInsets.only(
+  //                   left: 10.0,
+  //                 ),
+  //                 child: Icon(
+  //                   Icons.more_horiz,
+  //                   color: Colors.grey,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           height: 260.0,
+  //           child: Padding(
+  //             padding: const EdgeInsets.only(top: 12.0),
+  //             child: ListView.builder(
+  //               scrollDirection: Axis.horizontal,
+  //               itemCount: placesList.length,
+  //               itemBuilder: (BuildContext context, int index) {
+  //                 final Destination destination = placesList[index];
+  //                 return GestureDetector(
+  //                   onTap: () {
+  //                     Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(
+  //                         builder: (context) =>
+  //                             Details(destination: destination),
+  //                       ),
+  //                     );
+  //                   },
+  //                   child: Padding(
+  //                     padding: const EdgeInsets.only(
+  //                       right: 20.0,
+  //                     ),
+  //                     child: RecommendedDestination(
+  //                       destination: destination,
+  //                     ),
+  //                   ),
+  //                 );
+  //               },
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  ///////////////////////// REKOMENDASI ///////////////////////////
   Widget buildRecommendedWidget() {
     List recommendedDestinations = destinationService.recommendedDestinations;
 
@@ -410,7 +487,7 @@ class _HomeState extends State<Home> {
   }
 
   ////////////////////////ISI ABOUT US////////////////////////////////////////////////////////////////
-  Widget buildHeaderAboutWidget() {
+  Widget buildHeaderProfileWidget() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Stack(
@@ -455,7 +532,7 @@ class _HomeState extends State<Home> {
   Widget buildBookMarkWidget() {
     List bookmarkedDestination = bookmarkService.bookmarkedDestination;
     return Padding(
-        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        padding: const EdgeInsets.only(top: 15, bottom: 0),
         child: Column(
           children: [
             Padding(
@@ -494,7 +571,8 @@ class _HomeState extends State<Home> {
                   physics: BouncingScrollPhysics(),
                   itemCount: bookmarkedDestination.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final Bookmark anjing = bookmarkedDestination[index];
+                    final Bookmark bookwidgetdestination =
+                        bookmarkedDestination[index];
                     return GestureDetector(
                       // onTap: () {
                       //   Navigator.push(
@@ -509,7 +587,7 @@ class _HomeState extends State<Home> {
                           bottom: 20.0,
                         ),
                         child: BookMarkPage(
-                          anjing: anjing,
+                          bookwidget: bookwidgetdestination,
                         ),
                       ),
                     );
@@ -523,10 +601,9 @@ class _HomeState extends State<Home> {
 
   ///////////////////////////////// WILAYAH ///////////////////////////////////
   Widget buildWilayah() {
-    Completer<GoogleMapController> _controller = Completer();
     final CameraPosition _kGooglePlex = CameraPosition(
-      target: LatLng(-6.9733112, 107.6281415),
-      zoom: 14.4746,
+      target: LatLng(-6.9741757, 107.6302268),
+      zoom: 13.4746,
     );
 
     return Padding(
@@ -567,7 +644,7 @@ class _HomeState extends State<Home> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 12.0),
                 child: GoogleMap(
-                  mapType: MapType.hybrid,
+                  mapType: MapType.normal,
                   initialCameraPosition: _kGooglePlex,
                 ),
               ),

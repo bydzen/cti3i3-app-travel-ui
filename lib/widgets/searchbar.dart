@@ -33,7 +33,7 @@ class SearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(5.0),
           ),
           hintText: "Search Destination",
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.search,
             color: Colors.grey,
           ),

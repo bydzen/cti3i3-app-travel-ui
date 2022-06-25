@@ -35,16 +35,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wisata'),
+        title: const Text('Wisata'),
       ),
       body: Visibility(
         visible: isLoaded,
         child: ListView.builder(
             itemCount: destination?.length,
             itemBuilder: (context, index) {
-              return Container(
-                child: Text(destination![index].nama),
-              );
+              return Text(destination![index].nama);
             }),
         replacement: const Center(
           child: CircularProgressIndicator(),

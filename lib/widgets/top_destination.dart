@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:LocaVel/models/destination.dart';
+import 'package:locavel/models/destination.dart';
 
 // import '../models/places_model.dart';
 // import '../services/places_service.dart';
@@ -7,6 +7,7 @@ import 'package:LocaVel/models/destination.dart';
 class TopDestination extends StatelessWidget {
   final Destination destination;
 
+  // ignore: use_key_in_widget_constructors
   const TopDestination({required this.destination});
 
   @override

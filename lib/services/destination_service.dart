@@ -1,12 +1,5 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'package:http/http.dart' as http;
-import 'package:LocaVel/models/destination.dart';
-// import '../models/places.dart';
+import 'package:locavel/models/destination.dart';
 
-// import '../services/places_service.dart';
-
-//////////////////////////// OKE ??////////
 class DestinationService {
   static final List<String> _gallery = [
     'images/destination1.jpg',
@@ -93,6 +86,7 @@ class DestinationService {
         gallery: _gallery),
   ];
 
+  // ignore: non_constant_identifier_names
   List<Destination> BookMarkPage = [
     Destination(
         name: 'Raja Amper',
