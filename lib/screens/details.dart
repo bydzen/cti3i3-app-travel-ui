@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locavel/models/destination.dart';
+import 'package:locavel/services/places_service.dart';
 
 class Details extends StatelessWidget {
   final Destination destination;

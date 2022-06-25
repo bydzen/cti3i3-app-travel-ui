@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Destination>? destination;
+  List<PlacesWisata>? placeswisata;
   var isLoaded = false;
 
   @override
@@ -22,9 +22,9 @@ class _HomeState extends State<Home> {
   }
 
   getData() async {
-    destination = await Places().getDestination();
+    placeswisata = await Places().getPlacesWisata();
 
-    if (destination != null) {
+    if (placeswisata != null) {
       setState(() {
         isLoaded = true;
       });
@@ -40,9 +40,9 @@ class _HomeState extends State<Home> {
       body: Visibility(
         visible: isLoaded,
         child: ListView.builder(
-            itemCount: destination?.length,
+            itemCount: placeswisata?.length,
             itemBuilder: (context, index) {
-              return Text(destination![index].nama);
+              return Text(placeswisata![index].nama);
             }),
         replacement: const Center(
           child: CircularProgressIndicator(),
