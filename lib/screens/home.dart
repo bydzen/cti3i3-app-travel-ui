@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:locavel/models/bookmark.dart';
+import 'package:locavel/screens/maps.dart';
 import 'package:locavel/services/bookmark_service.dart';
 import 'package:flutter/material.dart';
 import 'package:locavel/models/destination.dart';
@@ -11,10 +11,6 @@ import 'package:locavel/widgets/top_destination.dart';
 import 'package:locavel/screens/details.dart';
 import 'package:locavel/widgets/bookmark_destination.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:locavel/services/places_service.dart';
-import 'package:locavel/widgets/places_widget.dart';
-
-import '../models/places_model.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,7 +22,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   DestinationService destinationService = DestinationService();
   BookmarkService bookmarkService = BookmarkService();
-  Places placesService = Places();
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +48,7 @@ class _HomeState extends State<Home> {
                 children: [
                   buildProfileWidget(),
                   buildSearchWidget(),
-                  buildPlacesWidget(),
-                  // buildRecommendedWidget(),
+                  buildRecommendedWidget(),
                   buildTopWidget(),
                 ],
               ),
@@ -237,8 +231,9 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildPlacesWidget() {
-    List placesList = placesService.placesList;
+  ///////////////////////// REKOMENDASI ///////////////////////////
+  Widget buildRecommendedWidget() {
+    List recommendedDestinations = destinationService.recommendedDestinations;
 
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -281,16 +276,17 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.only(top: 12.0),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: placesList.length,
+                itemCount: recommendedDestinations.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final PlacesWisata placeswisata = placesList[index];
+                  final Destination destination =
+                      recommendedDestinations[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              PlacesWisataRekomen(placeswisata: placeswisata),
+                              Details(destination: destination),
                         ),
                       );
                     },
@@ -298,8 +294,8 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.only(
                         right: 20.0,
                       ),
-                      child: PlacesWisataRekomen(
-                        placeswisata: placeswisata,
+                      child: RecommendedDestination(
+                        destination: destination,
                       ),
                     ),
                   );
@@ -311,83 +307,6 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-  ///////////////////////// REKOMENDASI ///////////////////////////
-  // Widget buildRecommendedWidget() {
-  //   List recommendedDestinations = destinationService.recommendedDestinations;
-  //
-  //   return Padding(
-  //     padding: const EdgeInsets.only(top: 10, bottom: 10),
-  //     child: Column(
-  //       children: [
-  //         Padding(
-  //           padding: const EdgeInsets.symmetric(
-  //             vertical: 6.0,
-  //           ),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.end,
-  //             crossAxisAlignment: CrossAxisAlignment.end,
-  //             children: const [
-  //               Expanded(
-  //                 child: Text(
-  //                   'Rekomendasi',
-  //                   style: TextStyle(
-  //                     color: Colors.black,
-  //                     fontFamily: 'RockoFLF Bold',
-  //                     fontWeight: FontWeight.bold,
-  //                     fontSize: 24,
-  //                   ),
-  //                 ),
-  //               ),
-  //               Padding(
-  //                 padding: EdgeInsets.only(
-  //                   left: 10.0,
-  //                 ),
-  //                 child: Icon(
-  //                   Icons.more_horiz,
-  //                   color: Colors.grey,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           height: 260.0,
-  //           child: Padding(
-  //             padding: const EdgeInsets.only(top: 12.0),
-  //             child: ListView.builder(
-  //               scrollDirection: Axis.horizontal,
-  //               itemCount: recommendedDestinations.length,
-  //               itemBuilder: (BuildContext context, int index) {
-  //                 final Destination destination =
-  //                     recommendedDestinations[index];
-  //                 return GestureDetector(
-  //                   onTap: () {
-  //                     Navigator.push(
-  //                       context,
-  //                       MaterialPageRoute(
-  //                         builder: (context) =>
-  //                             Details(destination: destination),
-  //                       ),
-  //                     );
-  //                   },
-  //                   child: Padding(
-  //                     padding: const EdgeInsets.only(
-  //                       right: 20.0,
-  //                     ),
-  //                     child: RecommendedDestination(
-  //                       destination: destination,
-  //                     ),
-  //                   ),
-  //                 );
-  //               },
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget buildTopWidget() {
     List topDestinations = destinationService.topDestinations;
@@ -604,6 +523,7 @@ class _HomeState extends State<Home> {
 
   ///////////////////////////////// WILAYAH ///////////////////////////////////
   Widget buildWilayah() {
+    // ignore: unused_local_variable
     final CameraPosition _kGooglePlex = CameraPosition(
       target: LatLng(-6.9741757, 107.6302268),
       zoom: 13.4746,
@@ -646,10 +566,7 @@ class _HomeState extends State<Home> {
               height: MediaQuery.of(context).size.height * 0.7,
               child: Padding(
                 padding: const EdgeInsets.only(top: 12.0),
-                child: GoogleMap(
-                  mapType: MapType.normal,
-                  initialCameraPosition: _kGooglePlex,
-                ),
+                child: MapSample(),
               ),
             ),
           ],

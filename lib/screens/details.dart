@@ -1,6 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:locavel/models/destination.dart';
-import 'package:locavel/services/places_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Details extends StatelessWidget {
   final Destination destination;
@@ -289,6 +291,15 @@ class Details extends StatelessWidget {
   }
 
   Widget buildBookWidget(BuildContext context) {
+    final Uri toLaunch =
+        Uri(scheme: 'https', host: 'goo.gl', path: 'maps/DANkvX3pz9Z6xDDD6');
+    _launchURL(toLaunch) async {
+      if (!await launchUrl(toLaunch,
+          webViewConfiguration: const WebViewConfiguration(
+              enableJavaScript: true, enableDomStorage: true),
+          mode: LaunchMode.externalApplication)) throw 'Could not launch';
+    }
+
     return Padding(
       padding: const EdgeInsets.only(top: 24.0),
       child: ConstrainedBox(
@@ -303,7 +314,7 @@ class Details extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
             ),
           ),
-          onPressed: () {},
+          onPressed: () => {_launchURL(toLaunch)},
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

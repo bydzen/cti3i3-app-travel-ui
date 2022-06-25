@@ -36,5 +36,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+2
     </application>
 </manifest>
