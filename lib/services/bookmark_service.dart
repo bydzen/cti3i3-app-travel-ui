@@ -1,44 +1,26 @@
 import 'dart:convert';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:locavel/models/bookmark.dart';
 import 'package:http/http.dart' as http;
 
 class BookmarkService {
-  // static get destination => 1;
 
-  Future<Bookmark?> getPlacesWisata() async {
-    var client = http.Client();
-    await dotenv.load();
-    var uri = Uri.parse(dotenv.get('API_BASE_URI'));
-
-    var response = await client.get(uri);
-
-    if (response.statusCode == 200) {
-      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-      return parsed.map<Bookmark>((json) => Bookmark.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-
-  // static final List<String> _gallery = [
-  //   'images/destination1.jpg',
-  //   'images/destination2.jpg',
-  //   'images/destination3.jpg',
-  //   'images/destination4.jpg',
-  // ];
+  // getPlacesWisata() async {
+  //   var client = http.Client();
+  //   await dotenv.load();
+  //   var uri = Uri.parse(dotenv.get('API_BASE_URI'));
+  //
+  //   var response = await client.get(uri);
+  //
+  //   if (response.statusCode == 200) {
+  //     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+  //     return parsed.map<Bookmark>((json) => Bookmark.fromJson(json)).toList();
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
 
   List<Bookmark> bookmarkedDestination = [
-    // Bookmark(
-    //     id: destination.id,
-    //     nama: destination.nama,
-    //     tempat: destination.tempat,
-    //     harga: destination.harga,
-    //     konten: destination.konten,
-    //     rating: destination.rating,
-    //     gambar: 'images/destination1'),
-
     Bookmark(
         id: 1,
         name: 'Raja Ampat',
@@ -79,4 +61,17 @@ class BookmarkService {
           'Kenyamanan dan petualangan belum pernah menyatu secara harmonis dengan banyak keseruan seperti di Pulau Bintan, Provinsi Kepulauan Riau. Sebagai pulau terbesar di Kepulauan Riau, Bintan adalah salah satu tujuan yang paling disukai bagi mereka yang mencari kesenangan dari resor mewah, lapangan golf kelas dunia, dan pemandangan pantai yang menakjubkan. Jika lebih condong ke sisi petualang, Moms dan keluarga dapat mencoba menjelajahi Padang Pasir Busung yang penuh teka-teki, kapal MV Doulos Phos yang terbengkalai, atau Danau Biru Kawal. Jika Moms mencari kemewahan, cobalah menginap di Trikora Beach Club and Resort, The Sanchaya, atau Natra Bintan.',
     ),
   ];
+}
+
+class BookmarkServiceWithAPI {
+  final int id;
+  final String nama;
+  final String tempat;
+  final int harga;
+  final String konten;
+  final double rating;
+  final String gambar;
+
+  BookmarkServiceWithAPI(this.id, this.nama, this.tempat, this.harga, this.konten, this.rating, this.gambar);
+
 }
