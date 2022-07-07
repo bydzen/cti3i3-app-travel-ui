@@ -40,3 +40,10 @@ flutter:
               - asset: fonts/rockoflf-bold.ttf
               - asset: fonts/rockoultraflf.ttf
               - asset: fonts/rockoultraflf-bold.ttf
+        - family: JetBrains
+          fonts:
+              - asset: fonts/JetBrainsMono-Regular.ttf
+              - asset: fonts/JetBrainsMono-SemiBold.ttf
+              - asset: fonts/JetBrainsMono-SemiBoldItalic.ttf
+              - asset: fonts/JetBrainsMono-Thin.ttf
+              - asset: fonts/JetBrainsMono-ThinItalic.ttf

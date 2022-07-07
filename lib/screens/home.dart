@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:locavel/models/bookmark.dart';
 import 'package:locavel/screens/maps.dart';
 import 'package:locavel/services/bookmark_service.dart';
@@ -12,9 +11,6 @@ import 'package:locavel/widgets/top_destination.dart';
 import 'package:locavel/screens/details.dart';
 import 'package:locavel/widgets/bookmark_destination.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,29 +22,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   DestinationService destinationService = DestinationService();
   BookmarkService bookmarkService = BookmarkService();
-
-  Future<List<BookmarkServiceWithAPI>> _getBookmarkAPI() async {
-    /////////////////////// CALL THE API ENDPOINTS //////////////////////////
-    var data = await http.get(Uri.parse(dotenv.get('API_BASE_URI')));
-
-    var jsonData = json.decode(data.body);
-
-    List<BookmarkServiceWithAPI> bookmarkAPI = [];
-
-    for(var b in jsonData) {
-      BookmarkServiceWithAPI bookmarkAPIs = BookmarkServiceWithAPI(
-        b["id"],
-        b["nama"],
-        b["tempat"],
-        b["harga"],
-        b["konten"],
-        b["rating"],
-        b["gambar"],
-      );
-    }
-
-    return bookmarkAPI;
-  }
 
   @override
   Widget build(BuildContext context) {

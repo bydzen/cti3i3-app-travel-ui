@@ -1,25 +1,7 @@
-import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:locavel/models/bookmark.dart';
 import 'package:http/http.dart' as http;
 
 class BookmarkService {
-
-  // getPlacesWisata() async {
-  //   var client = http.Client();
-  //   await dotenv.load();
-  //   var uri = Uri.parse(dotenv.get('API_BASE_URI'));
-  //
-  //   var response = await client.get(uri);
-  //
-  //   if (response.statusCode == 200) {
-  //     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-  //     return parsed.map<Bookmark>((json) => Bookmark.fromJson(json)).toList();
-  //   } else {
-  //     throw Exception('Failed to load data');
-  //   }
-  // }
-
   List<Bookmark> bookmarkedDestination = [
     Bookmark(
         id: 1,
@@ -72,6 +54,47 @@ class BookmarkServiceWithAPI {
   final double rating;
   final String gambar;
 
-  BookmarkServiceWithAPI(this.id, this.nama, this.tempat, this.harga, this.konten, this.rating, this.gambar);
-
+  BookmarkServiceWithAPI(this.id, this.nama, this.tempat, this.harga,
+      this.konten, this.rating, this.gambar);
 }
+
+///// API 🔥 /////
+
+class Places {
+  Future<List<PlacesWisata>?> getDestination() async {
+    var client = http.Client();
+    var uri =
+        Uri.parse('https://locavel-dot-rebage-bydzen.as.r.appspot.com/wisata');
+
+    var response = await client.get(uri);
+
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return placesWisataFromJson(json);
+    }
+    return null;
+  }
+}
+
+// class Places {
+//   get convert => null;
+
+//   Future<List<PlacesWisata>?> getDestination() async {
+//     var client = http.Client();
+//     var uri =
+//         Uri.parse('https://locavel-dot-rebage-bydzen.as.r.appspot.com/wisata');
+
+//     var response = await client.get(uri);
+
+//     if (response.statusCode == 200) {
+//       var json = response.body;
+//       List<dynamic> list = convert.jsonDecode(json);
+
+//       List<PlacesWisata> apiData =
+//           list.map((e) => PlacesWisata.fromJson(e)).toList();
+
+//       return apiData;
+//     }
+//     return null;
+//   }
+// }
